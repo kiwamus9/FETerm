@@ -4,23 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f790e7-e954-44a5-977a-aa6bc837f3f7" name="変更" comment="wakaran">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/main_1_0_SNAPSHOT.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/preload_1_0_SNAPSHOT.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/render_1_0_SNAPSHOT.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/main/FETerm.main.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/main/FETerm.main.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/preload/FETerm.preload.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/preload/FETerm.preload.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/render/FETerm.render.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/render/FETerm.render.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a8f790e7-e954-44a5-977a-aa6bc837f3f7" name="変更" comment="initial 2">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preload/src/main/kotlin/PreLoad.kt" beforeDir="false" afterPath="$PROJECT_DIR$/preload/src/main/kotlin/PreLoad.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +113,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1670314952243</updated>
-      <workItem from="1670314956290" duration="798000" />
+      <workItem from="1670314956290" duration="1320000" />
     </task>
     <task id="LOCAL-00001" summary="wakaran">
       <created>1670315161577</created>
@@ -136,14 +122,33 @@
       <option name="project" value="LOCAL" />
       <updated>1670315161577</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="initial 2">
+      <created>1670315797854</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1670315797854</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="wakaran" />
-    <option name="LAST_COMMIT_MESSAGE" value="wakaran" />
+    <MESSAGE value="initial 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial 2" />
   </component>
 </project>
