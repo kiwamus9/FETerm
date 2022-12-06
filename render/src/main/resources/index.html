@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <!--    <link rel="stylesheet" type="text/css" href="css/F2Term.css">-->
+<!--    <script src="js/simplebar.min.js"></script>-->
+<!--    <link rel="stylesheet" href="css/simplebar.css"/>-->
+    <link rel="stylesheet" type="text/css" href="css/finder.css">
+    <title>Title</title>
+</head>
+
+<body>
+<span style="background-color: yellow">きわむ222</span>
+<div class="fritz2">
+    <div class="container">
+        <div id="target"></div>
+    </div>
+</div>
+
+<div class="footer"></div>
+<script>
+    // const fi2 = document.getElementById("finder-titles-scroll-area")
+    // const simpleBar = document.getElementById("finder-items-scroll-area")
+    // const scrollElement = simpleBar.querySelector(".simplebar-content-wrapper")
+    // scrollElement.onscroll = function (e) {
+    //     fi2.scrollLeft = e.target.scrollLeft
+    // }
+    // const f1 = document.getElementById("finder-titles-scroll-area1")
+    // const f2 = document.getElementById("f2")
+    // // f2.onscroll = function (e) {
+    // //     console.log(e)
+    // //     f1.scrollLeft = e.target.scrollLeft
+    // // }
+    // f1.onclick = function (e) {
+    //     console.log("cl")
+    // }
+    // f1.onwheel = function (e) {
+    //     console.log("totol")
+    // }
+
+    function elem(idName) {
+        return document.getElementById(idName)
+    }
+
+    function classElem(idName, num) {
+        return document.getElementsByClassName(idName)[num]
+    }
+
+    function hoee() {
+        var finder_items = Array.from(document.getElementsByClassName("finder-item-col"))
+        finder_items.forEach(function (value, index) {
+            value.style = "flex-basis: 100px;"
+        })
+        var finder_titles = Array.from(document.getElementsByClassName("finder-title"))
+        finder_titles.forEach(function (value, index) {
+            value.style = "flex-basis: 100px;"
+        })
+    }
+
+    function scc() {
+        elem("finder-titles-scroll-area1").scrollLeft += 40
+        // elem("finder-titles-scroll-area2").scrollLeft += 40
+        // elem("finder-titles-scroll-area3").scrollLeft += 40
+        elem("wakaran").scrollLeft += 40
+    }
+
+    function set() {
+        const area_id = "wakaran"
+
+        // const vertical_scroll_bar = document.querySelector("#" + area_id + " .inner-scrollbar-vertical")[0]
+        // const horizontal_scroll_bar = document.querySelector("#" + area_id + " .inner-scrollbar-horizontal")[0]
+        const root = document.getElementById(area_id)
+        const children = Array.from(root.children)
+        const vertical_scroll_bar = document.querySelector("#" + area_id + " .inner-scrollbar-vertical")
+        const horizontal_scroll_bar = document.querySelector("#" + area_id + " .inner-scrollbar-horizontal")
+        const vertical_scroll_thumb = vertical_scroll_bar.querySelector(".inner-scrollbar-vertical-thumb")
+        const horizontal_scroll_thumb = horizontal_scroll_bar.querySelector(".inner-scrollbar-horizontal-thumb")
+
+        // console.log("" + offsetWidth + "," + offsetHeight + "," + scrollWidth + "," + scrollHeight + "," + scrollLeft + "," + scrollTop)
+
+        //let vertical_scroll_thumb_width = offsetWidth * offsetWidth / scrollWidth
+        let vertical_scroll_thumb_width = 100
+        console.log(vertical_scroll_thumb_width)
+        horizontal_scroll_thumb.style = "width: " + vertical_scroll_thumb_width + "px;"
+
+        root.style = "width: 900px;"
+        root.clientWidth = 600
+        let isClick = false
+        horizontal_scroll_thumb.onmousedown = () => {
+            console.log("kita")
+
+            children.forEach(function (elem) {
+                elem.scrollLeft += 40
+            })
+
+            isClick = true
+        }
+        horizontal_scroll_thumb.onmousemove = (e) => {
+            // scrollLeft += 40
+        }
+        horizontal_scroll_thumb.onmouseup = () => {
+            isClick = false
+        }
+
+
+        // elem("ho").style.width = varWidth + "px"
+    }
+</script>
+
+<div id="chrome-version" style="color: white">aaa</div>
+<div id="node-version" style="color: white">aaaa</div>
+<div id="electron-version" style="color: white">aaa</div>
+
+<hr>
+<div id="tmp"></div>
+<script>
+    // let x = new SimpleBar(document.getElementById("tmp"))
+    // console.log(x)
+</script>
+
+<script src="render.js"></script>
+</body>
+</html>

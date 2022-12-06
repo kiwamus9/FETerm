@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--    <link rel="stylesheet" type="text/css" href="css/F2Term.css">-->
+    <link rel="stylesheet" type="text/css" href="../src/main/resources/css/finder.css">
+    <title>Title</title>
+
+</head>
+
+
+<body>
+<div class="header">
+    <div id="id1"></div>
+    <div id="id2"></div>
+
+</div>
+<div class="container">
+    <div id="target"></div>
+</div>
+<hr>
+
+<div class="container">
+    <div class="finder">
+        <div class="finder-filename-col">
+            <div class="finder-row-title">
+                <div class="finder-row-title-string">名前</div>
+                <div class="finder-row-title-button">+
+                    <div class="drag-area"></div>
+                </div>
+            </div>
+            <div class="finder-row-items">
+
+                <div class="finder-row-item" draggable="true">bbbbb</div>
+                <div class="finder-row-item" draggable="true">bbbbbcccccccccbbbbbcccccccccbbbbbccccccccc</div>
+                <div class="finder-row-item" draggable="true">タイトルタイトルタイトルタイトルタイトル</div>
+                <div class="finder-row-item" draggable="true">
+                    aabaaaaaaaaaaaaaabbbbbaaaaa
+                </div>
+
+                <div class="finder-row-item" draggable="true">bbbbb</div>
+                <div class="finder-row-item" draggable="true">
+                    bbbbb
+                </div>
+                <div class="finder-row-item" draggable="true">bbbbb</div>
+                <div class="finder-row-item" draggable="true">bbbbb</div>
+                <div class="finder-row-item" draggable="true">aaaaaaaaaaaaaaaa</div>
+                <div class="finder-row-item" draggable="true">ccccc</div>
+                <div class="finder-row-item" draggable="true">aaaaaaaaaaaaaaaa</div>
+                <div class="finder-row-item" draggable="true">ccccc</div>
+            </div>
+            <div class="finder-row-item" draggable="true">bbbbb</div>
+            <div class="finder-row-item" draggable="true">bbbbb</div>
+            <div class="finder-row-item" draggable="true">aaaaaaaaaaaaaaaa</div>
+        </div>
+        <div id="t1" class="finder-col">
+            <div class="finder-row-title">
+                <div class="finder-row-title-string">タイトル</div>
+                <div class="finder-row-title-button">+
+                    <div class="drag-area"></div>
+                </div>
+            </div>
+            <div class="finder-row-items">
+                <div class="finder-row-item" draggable="true">bbbbb</div>
+                <div class="finder-row-item" draggable="true">bbbbb</div>
+                <div class="finder-row-item" draggable="true">
+                    aabaaaaaaaaaaaaaabbbbbaaaaa
+                </div>
+
+                <div class="finder-row-item" draggable="true">bbbbb</div>
+                <div class="finder-row-item" draggable="true">
+                    bbbbb
+                </div>
+
+                <div class="finder-row-item" draggable="true">bbbbb</div>
+                <div class="finder-row-item" draggable="true">bbbbb</div>
+                <div class="finder-row-item" draggable="true">aaaaaaaaaaaaaaaa</div>
+                <div class="finder-row-item" draggable="true">ccccc</div>
+                <div class="finder-row-item" draggable="true">aaaaaaaaaaaaaaaa</div>
+                <div class="finder-row-item" draggable="true">ccccc</div>
+                <div class="finder-row-item" draggable="true">bbbbb</div>
+                <div class="finder-row-item" draggable="true">bbbbb</div>
+                <div class="finder-row-item" draggable="true">aaaaaaaaaaaaaaaa</div>
+            </div>
+        </div>
+        <div id="t2" class="finder-col">
+            <div id="longMenu" class="finder-row-title">
+                <div class="finder-row-title-string">メニューパート3メニューパート3メニューパート3</div>
+                <div class="finder-row-title-button">+
+                    <div class="drag-area"></div>
+                </div>
+            </div>
+        </div>
+        <div id="t3" class="finder-col-last">
+            <div class="finder-row-title">
+                <div class="finder-row-title-string">長いメニュー</div>
+                <div class="finder-row-title-button">+
+                    <div class="non-drag-area"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button onclick="hoee()">hoee</button>
+</div>
+<div class="footer"></div>
+<script>
+    const t1 = document.getElementById("t1")
+    const t2 = document.getElementById("t2")
+
+    // document.onclick= function hoee(ev) {
+    //     let f = document.getElementById('t1');
+    //     document.addEventListener('click', function(ev){
+    //         f.style.transform = 'translateY('+(ev.clientY-25)+'px)';
+    //         f.style.transform += 'translateX('+(ev.clientX-25)+'px)';
+    //     },false);
+    // }
+</script>
+<script src="F2Term2.js"></script>
+</body>
+</html>

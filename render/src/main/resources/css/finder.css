@@ -1,0 +1,240 @@
+@charset "UTF-8";
+@media (prefers-color-scheme: light) {
+  :root {
+    --finder-background-color: #ffffff;
+    --finder-accent-background-color: #ffffff;
+    --finder-title-background-color: #ffffff;
+    --finder-text-color: #000000;
+    --finder-background-selected-color: #000000;
+    --finder-text-selected-color: #ffffff;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --finder-background-color: rgb(30, 30, 30);
+    --finder-accent-background-color: rgb(41, 41, 41);
+    --finder-title-background-color: rgb(55, 55, 55);
+    --finder-text-color: #ffffff;
+    --finder-background-selected-color: #ffffff;
+    --finder-text-selected-color: #000000;
+    --finder-item-selected-color: rgb(118, 55, 125);
+  }
+}
+
+body {
+  background-color: var(--finder-background-color);
+  overflow: hidden;
+}
+
+.finder {
+  white-space: nowrap; /*日本語に必要*/
+  background-color: var(--finder-background-color);
+  color: var(--finder-text-color);
+  height: 300px;
+  font-size: 11px;
+  font-family: sans-serif;
+}
+
+.finder-items-scroll-wrapper {
+  position: relative;
+}
+
+.finder-items-wrapper {
+  position: relative;
+  height: 200px;
+  overflow-x: hidden;
+}
+
+.finder-titles-wrapper {
+  display: flex;
+}
+
+.finder-titles {
+  display: flex;
+  border-bottom: thin solid #999999;
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow-x: hidden;
+}
+.finder-titles .finder-title {
+  display: flex;
+  justify-content: space-between;
+  overflow-x: hidden;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  min-width: 100px;
+  flex-basis: 150px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.finder-titles .finder-title.mouse-down {
+  background-color: rgb(149, 149, 149);
+}
+.finder-titles .finder-title.last-col {
+  flex-grow: 1;
+}
+.finder-titles .finder-title .finder-title-label {
+  padding-left: 1em;
+  max-width: calc(100% - 2em);
+  overflow-x: hidden;
+  user-select: none;
+}
+.finder-titles .finder-title .finder-row-title-button {
+  display: flex;
+  align-items: center;
+}
+.finder-titles .finder-title .finder-row-title-button .button-icon {
+  vertical-align: center;
+}
+.finder-titles .finder-title .finder-row-title-button .non-drag-area, .finder-titles .finder-title .finder-row-title-button .drag-area {
+  min-width: 7pt;
+  max-width: 7pt;
+  height: 1.5em;
+  flex-basis: 7pt;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.finder-titles .finder-title .finder-row-title-button .drag-area {
+  border-right: thin solid #999999;
+  cursor: col-resize;
+}
+
+.finder-items {
+  display: flex;
+}
+.finder-items:nth-of-type(odd) {
+  background-color: var(--finder-accent-background-color);
+}
+.finder-items.selected {
+  background-color: var(--finder-item-selected-color);
+}
+
+.finder-item-col {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  min-width: 100px;
+  flex-basis: 150px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.finder-item-col .finder-item-col-contents {
+  margin-left: 5px;
+  margin-right: 10px;
+  overflow-x: hidden;
+  vertical-align: middle;
+}
+.finder-item-col .finder-item-col-contents.right {
+  text-align: right;
+}
+.finder-item-col .finder-item-col-contents.center {
+  text-align: center;
+}
+.finder-item-col.last-col {
+  flex-grow: 1;
+}
+
+.finderHeaderContextMenu {
+  display: none;
+  position: fixed;
+  z-index: 5;
+  /*height:100px;*/
+  white-space: nowrap;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 1em 1em 1em 10em;
+  background-color: var(--finder-background-color);
+  color: var(--finder-text-color);
+  border: 1px solid #eee;
+  border-radius: 3%;
+  padding-inline-start: 0;
+}
+.finderHeaderContextMenu.show {
+  display: block;
+}
+.finderHeaderContextMenu li {
+  list-style: none;
+  margin: 0;
+  padding-right: 3px;
+  cursor: pointer;
+}
+.finderHeaderContextMenu li.selected {
+  background-color: var(--finder-background-selected-color);
+  color: var(--finder-text-selected-color);
+  border-radius: 3%;
+}
+
+.inner-scrollbar-vertical {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 10px; /* スクロールバーの幅 */
+  background-color: var(--finder-accent-background-color);
+}
+
+.inner-scrollbar-vertical-thumb {
+  position: relative;
+  min-height: 10px;
+  background-color: #baa4a9;
+  border-radius: 30px;
+}
+
+.inner-scrollbar-horizontal {
+  position: absolute;
+  left: 0;
+  right: 10px;
+  top: calc(100% - 10px);
+  height: 10px; /* スクロールバーの幅 */
+  background-color: var(--finder-accent-background-color);
+}
+
+.inner-scrollbar-horizontal-thumb {
+  position: relative;
+  border-top: 1px;
+  width: 10px;
+  height: 8px;
+  border-radius: 30px;
+  background-color: #baa4a9;
+}
+
+@keyframes rotate-folder- {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+}
+.expandArrow {
+  transition: all 150ms;
+}
+
+.expandArrow.expand {
+  transform: rotate(90deg);
+}
+
+.finder-items-wrapper-column {
+  display: flex;
+  height: 200px;
+  overflow: hidden;
+}
+
+.finder-items-column {
+  min-width: 100px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 150px;
+  overflow: hidden;
+  user-select: none;
+}
+.finder-items-column.last-col {
+  flex-grow: 1;
+}
+.finder-items-column .finder-items-column-item:nth-of-type(odd) {
+  background-color: var(--finder-accent-background-color);
+}
+.finder-items-column .finder-items-column-item.selected {
+  background-color: var(--finder-item-selected-color);
+}
+
+/*# sourceMappingURL=finder.css.map */

@@ -1,0 +1,108 @@
+thead th {
+    /*resize: horizontal;*/
+    overflow: hidden;
+}
+
+table {
+    background-color: black;
+    width: max-content;
+
+}
+
+th,
+td {
+    background-color: lightgray;
+}
+
+.cursor_col_resize {
+    cursor: col-resize;
+}
+
+.FileList {
+    list-style-type: none !important
+}
+
+.FileListHeader span {
+    user-select: none;
+    display: inline-block;
+    border: solid black 1px;
+    box-sizing: border-box;
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+
+#FileListItemContextMenu {
+    display: none;
+    position: fixed;
+
+    /*height:100px;*/
+    margin: 0;
+    background-color: #f0f0f0;
+    border: 1px solid #eee;
+    border-radius: 5%;
+    padding-inline-start: 0px;
+
+
+}
+
+#FileListItemContextMenu.show {
+    display: block;
+}
+
+#FileListItemContextMenu li {
+    list-style: none;
+    margin: 0px;
+    padding-right: 3px;
+    cursor: pointer;
+}
+
+#FileListItemContextMenu li.selected {
+    background-color: black;
+    color: white;
+}
+
+/*ul li:nth-child(even) {*/
+/*    !*偶数番目のliだけ背景色を変える*!*/
+/*    background: whitesmoke;*/
+/*}*/
+
+.FileListItem span {
+    display: inline-block;
+}
+
+.FLCol_basename {
+    width: 100px;
+}
+
+.FLCol_mtime {
+    width: 100px;
+}
+
+.FLCol_birthTime {
+    width: 100px;
+}
+
+.FLCol_aTime {
+    width: 100px;
+}
+
+.FLCol_cTime {
+    width: 100px;
+}
+
+.FLCol_size {
+    width: 100px;
+}
+
+.FLCol_type {
+    width: 100px;
+}
+
+.FLCol_mode {
+    width: 100px;
+}
+
+.FLCol_username {
+    width: 100px;
+}

@@ -1,0 +1,7 @@
+/node_modules/
+/mainProcess/
+/preloadProcess/
+/css/
+/icon/
+index.html
+render.js*
