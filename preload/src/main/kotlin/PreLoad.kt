@@ -2,7 +2,7 @@ import kotlinx.browser.document
 
 
 fun main() {
-    console.log("@rere222")
+    console.log("@rere22ddd2")
 }
 
 
