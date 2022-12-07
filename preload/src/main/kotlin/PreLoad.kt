@@ -1,39 +1,70 @@
+import fs.Stats
 import kotlinx.browser.document
+import kotlinx.browser.window
+import org.w3c.dom.HTMLDivElement
+import org.w3c.dom.events.Event
+import ext.electron.contextBridge
+import kotlin.time.measureTime
 
 
 fun main() {
-    console.log("@rere22ddd2")
+    window.addEventListener("DOMContentLoaded",
+        fun(_) {
+            fun replaceText(selector: String, text: String) {
+                document.getElementById(selector)?.innerHTML = text
+            }
+            arrayOf("chrome", "node", "electron").forEach {
+                replaceText("$it-version", process.versions.asDynamic()[it].toString())
+            }
+        }
+    )
+
+    // contextBridge.exposeInMainWorld("ipcRenderer", ipcRenderer)
+    contextBridge.exposeInMainWorld("getWhatLocal", ::getWhatLocal)
+    contextBridge.exposeInMainWorld("getRawFstatListLocal", ::getRawFstatListLocal)
+
 }
 
+fun getWhatLocal(name: String): MutableList<String> {
 
-
-fun preload2() {
-    fun replaceText(selector: String, text: String) {
-        document.getElementById(selector)?.innerHTML = text
+    val ret = mutableListOf<String>()
+    for (index in 0..5) {
+        ret += (name + index.toString())
     }
-    arrayOf("chrome", "node", "electron").forEach {
-        //replaceText(it, process.versions)
-        console.dir(process.versions)
-        console.log("nannde222")
-    }
+    return ret
 }
 
+//fun getRawFstatLocal(fullPathFileName: String): Stats {
+//    val rawFstat = fs.lstatSync(fullPathFileName)
+//    rawFstat.asDynamic()["basename"] = path.basename(fullPathFileName)
+//    rawFstat.asDynamic()["dirname"] = path.dirname(fullPathFileName)
+//    rawFstat.asDynamic()["extname"] = path.extname(fullPathFileName)
+//    return rawFstat
+//}
 
 
-// Node.js の全 API は、プリロードプロセスで利用可能です。
-// Chrome 拡張機能と同じサンドボックスも持っています。
+    fun getRawFstatListLocal(fullPathDirName: String): String {
+//    var rawFstatArray = arrayOf()
+//    for (let fileName of fs.readdirSync(fullPathDirName)) {
+//        rawFstatArray.push(getRawFstatLocal(path.join(fullPathDirName, fileName)))
+//    }
+//    return rawFstatArray
+        return "hoeee"
+    }
+
+
+//contextBridge.exposeInMainWorld("ipcRenderer", ipcRenderer)
+//contextBridge.exposeInMainWorld("getRawFstatLocal", getRawFstatLocal)
+//contextBridge.exposeInMainWorld("getRawFstatListLocal", getRawFstatListLocal)
+//contextBridge.exposeInMainWorld("MainProcUserIDPackage", userid)
+//contextBridge.exposeInMainWorld("MainProcPathPackage", path)
+//
+//contextBridge.exposeInMainWorld("fileSizeSI", fileSizeSI)
+//
+//contextBridge.exposeInMainWorld("createRemoteMachine", createRemoteMachine)
+
+
 /*
-window.addEventListener('DOMContentLoaded', () => {
-    const replaceText = (selector, text) => {
-        const element = document.getElementById(selector)
-        if (element) element.innerText = text
-    }
-
-    for (const dependency of ['chrome', 'node', 'electron']) {
-        replaceText(`${dependency}-version`, process.versions[dependency])
-    }
-})
-
 const path = require('path')
 const os = require('os')
 const fs = require("fs")

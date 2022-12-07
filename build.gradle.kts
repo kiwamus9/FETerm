@@ -27,6 +27,7 @@ project("main") {
 }
 
 project("preload") {
+
     tasks.register<Copy>("copyDevelopOutputs") {
         dependsOn("developmentExecutableCompileSync")
         from(layout.buildDirectory.dir("compileSync/main/developmentExecutable/kotlin"))

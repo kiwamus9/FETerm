@@ -73,6 +73,9 @@ inline fun Window.getRawFstatListLocal(fullPathDirName: String): Array<Stat> =
 inline fun Window.fileSizeSI(fileSize: Long): String =
     asDynamic().fileSizeSI(fileSize).unsafeCast<String>()
 
+inline fun Window.getWhatLocal(name: String): MutableList<String> =
+    asDynamic().getWhatLocal(name).unsafeCast<MutableList<String>>()
+
 //inline fun Window.createRemoteMachine():RemoteMachine =
 //    asDynamic().createRemoteMachine().unsafeCast<RemoteMachine>()
 

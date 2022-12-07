@@ -1,6 +1,7 @@
 import components.*
 import dev.fritz2.core.*
 import kotlinx.browser.document
+import kotlinx.browser.window
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
@@ -238,8 +239,14 @@ fun main() {
 //        document.body!!.appendChild(img);
 //    }
 
+    console.log("fff")
+
+    console.log(window.getWhatLocal("kiwamu"))
+
+
     val currentDir = "/Users/kiwamu/Downloads"
     val fileItemDataList = FileItemDataList(currentDir)
+
 
     render("#target") {
         FileItemListStore.setup(fileItemDataList)
