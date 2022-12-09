@@ -7,12 +7,14 @@
     "dependencies": {
         "electron": "^19.1.8",
         "html-to-image": "1.10.8",
+        "node-pty": "^0.10.1",
         "ssh2": "^1.11.0",
         "ssh2-sftp-client": "^9.0.4",
         "userid": "^1.2.5"
     },
     "devDependencies": {
         "electron-devtools-installer": "^3.2.0",
+        "electron-rebuild": "^3.2.9",
         "electron-reloader": "^1.2.3"
     }
 }

@@ -15,8 +15,11 @@ val fritz2Version = "1.0-RC1"
 dependencies {
     testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlinx:kotlinx-html:0.8.0")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.457")
     implementation("dev.fritz2:core:$fritz2Version")
     implementation(npm("html-to-image", "1.10.8"))
+    implementation(npm("xterm","^5.0.0"))
+
 }
 
 kotlin {

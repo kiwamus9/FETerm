@@ -1,5 +1,6 @@
 import components.*
 import dev.fritz2.core.*
+import dev.fritz2.routing.routerOf
 import kotlinx.browser.document
 import kotlinx.browser.window
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,10 +11,12 @@ import model.divFlexBasis
 import model.isSortKey
 import model.sortToBigger
 import org.w3c.dom.HTMLDivElement
+import org.w3c.dom.Window
 import org.w3c.dom.asList
 import org.w3c.dom.events.Event
 import org.w3c.dom.events.MouseEvent
 import kotlin.math.abs
+
 
 
 object FinderHeaderItemStore : RootStore<List<ContextMenuItem>>(fileListHeadersItems.toList()) {
@@ -123,7 +126,7 @@ fun RenderContext.finderTitle(
 
 fun RenderContext.finderItemsColumnItem(
     listIndex: Int, text: String, isFirstColumn: Boolean,
-    selectFileRange: SelectFileRangeStore
+    selectFileRange: SelectFileRangeStore,
 ): Tag<HTMLDivElement> {
     return div("finder-items-column-item") {
         if (isFirstColumn) {
@@ -242,11 +245,19 @@ fun main() {
     console.log("fff")
 
     console.log(window.getWhatLocal("kiwamu"))
+    //kotlinext.js.require("bootstrap/dist/css/bootstrap.css")
+    val xx = kotlinext.js.require("xterm/css/xterm.css")
+    console.log(xx)
 
-
+    console.log(Terminal())
     val currentDir = "/Users/kiwamu/Downloads"
     val fileItemDataList = FileItemDataList(currentDir)
 
+
+    window.onFromTty { event: Event, i: Int, s: String ->
+        console.log("eee")
+        console.log("${event}:${i}:${s}")
+    }
 
     render("#target") {
         FileItemListStore.setup(fileItemDataList)
@@ -263,193 +274,231 @@ fun main() {
         // select
         val selectFileRange = SelectFileRangeStore(Pair(null, null))
 
-        div("finder") {
-            // finder title context menu
-            finderHeaderContextMenu(FinderHeaderItemStore)
-            // finder body: Title
-            div("finder-titles-wrapper") {
-                div("finder-titles") {
-                    syncScrollLeftPosition handledBy {
-                        this.domNode.unsafeCast<HTMLDivElement>().scrollLeft = it
-                    }
-                    FinderHeaderItemStore.data.map { list ->
-                        list.filter { it.isShow }
-                    }.render(into = this) { list ->
-                        list.forEachIndexed { index, item ->
-                            finderTitle(
-                                item,
-                                (index == 0),
-                                (index == list.lastIndex),
-                                syncFlexBasisMap[item.label]!!
-                            ).afterMount { withDom, _ ->
-                                if (index == list.lastIndex) {
-                                    val parentNode = withDom.domNode.parentElement
-                                    horizontalScrollSize.update(
-                                        ScrollSize(
-                                            parentNode?.clientWidth?.toDouble() ?: 0.0,
-                                            parentNode?.scrollWidth?.toDouble() ?: 0.0
-                                        )
-                                    )
+        val router = routerOf("welcome")
+
+        button {
+            +"welcome"
+            clicks handledBy { router.update("welcome") }
+        }
+        button {
+            +"pageA"
+            clicks handledBy { router.update("pageA") }
+        }
+        button {
+            +"pageB"
+            clicks handledBy { router.update("pageB") }
+        }
+        button {
+            +"else"
+            clicks handledBy { router.update("else") }
+        }
+        section {
+            router.data.render { site ->
+                when (site) {
+                    "welcome" -> div("finder") {
+                        // finder title context menu
+                        finderHeaderContextMenu(FinderHeaderItemStore)
+                        // finder body: Title
+                        div("finder-titles-wrapper") {
+                            div("finder-titles") {
+                                syncScrollLeftPosition handledBy {
+                                    this.domNode.unsafeCast<HTMLDivElement>().scrollLeft = it
                                 }
-                            }
-                        }
-                    }
-                }
-            }
-            div("finder-items-scroll-wrapper") {
-                div("finder-items-wrapper-column") {
-                    syncScrollLeftPosition handledBy {
-                        this.domNode.unsafeCast<HTMLDivElement>().scrollLeft = it
-                    }
-                    FinderHeaderItemStore.data.map { list ->
-                        list.filter { it.isShow }
-                    }.render(into = this) {
-                        it.forEachIndexed { columnIndex, menuItem ->
-                            div("finder-items-column") {
-                                inlineStyle(syncFlexBasisMap[menuItem.label]!!.data)
-                                if (columnIndex == it.lastIndex) className("last-col")
-                                FileItemListStore.data.map { list ->
-                                    list.map { listItem -> listItem.getHumanizeString(menuItem.divID, "ja") }
-                                }.render(into = this) { stringList ->
-                                    stringList.forEachIndexed { index, string ->
-                                        finderItemsColumnItem(index, string, (columnIndex == 0), selectFileRange)
-                                            .afterMount { withDomTag, _ ->
-                                                if (index == stringList.lastIndex) {
-                                                    val parentNode = withDomTag.domNode.parentElement
-                                                    verticalScrollSize.update(
-                                                        ScrollSize(
-                                                            parentNode?.clientHeight?.toDouble() ?: 0.0,
-                                                            parentNode?.scrollHeight?.toDouble() ?: 0.0
-                                                        )
+                                FinderHeaderItemStore.data.map { list ->
+                                    list.filter { it.isShow }
+                                }.render(into = this) { list ->
+                                    list.forEachIndexed { index, item ->
+                                        finderTitle(
+                                            item,
+                                            (index == 0),
+                                            (index == list.lastIndex),
+                                            syncFlexBasisMap[item.label]!!
+                                        ).afterMount { withDom, _ ->
+                                            if (index == list.lastIndex) {
+                                                val parentNode = withDom.domNode.parentElement
+                                                horizontalScrollSize.update(
+                                                    ScrollSize(
+                                                        parentNode?.clientWidth?.toDouble() ?: 0.0,
+                                                        parentNode?.scrollWidth?.toDouble() ?: 0.0
                                                     )
-                                                }
+                                                )
                                             }
+                                        }
                                     }
                                 }
-                                syncScrollTopPosition handledBy {topPos ->
-                                    this.domNode.unsafeCast<HTMLDivElement>().scrollTop = topPos
+                            }
+                        }
+                        div("finder-items-scroll-wrapper") {
+                            div("finder-items-wrapper-column") {
+                                syncScrollLeftPosition handledBy {
+                                    this.domNode.unsafeCast<HTMLDivElement>().scrollLeft = it
                                 }
-                            }.afterMount { withDomTag, _ ->
-                                val parentNode = withDomTag.domNode.parentElement
-                                horizontalScrollSize.update(
-                                    ScrollSize(
-                                        parentNode?.clientWidth?.toDouble() ?: 0.0,
-                                        parentNode?.scrollWidth?.toDouble() ?: 0.0
+                                FinderHeaderItemStore.data.map { list ->
+                                    list.filter { it.isShow }
+                                }.render(into = this) {
+                                    it.forEachIndexed { columnIndex, menuItem ->
+                                        div("finder-items-column") {
+                                            inlineStyle(syncFlexBasisMap[menuItem.label]!!.data)
+                                            if (columnIndex == it.lastIndex) className("last-col")
+                                            FileItemListStore.data.map { list ->
+                                                list.map { listItem ->
+                                                    listItem.getHumanizeString(
+                                                        menuItem.divID,
+                                                        "ja"
+                                                    )
+                                                }
+                                            }.render(into = this) { stringList ->
+                                                stringList.forEachIndexed { index, string ->
+                                                    finderItemsColumnItem(
+                                                        index,
+                                                        string,
+                                                        (columnIndex == 0),
+                                                        selectFileRange
+                                                    )
+                                                        .afterMount { withDomTag, _ ->
+                                                            if (index == stringList.lastIndex) {
+                                                                val parentNode = withDomTag.domNode.parentElement
+                                                                verticalScrollSize.update(
+                                                                    ScrollSize(
+                                                                        parentNode?.clientHeight?.toDouble() ?: 0.0,
+                                                                        parentNode?.scrollHeight?.toDouble() ?: 0.0
+                                                                    )
+                                                                )
+                                                            }
+                                                        }
+                                                }
+                                            }
+                                            syncScrollTopPosition handledBy { topPos ->
+                                                this.domNode.unsafeCast<HTMLDivElement>().scrollTop = topPos
+                                            }
+                                        }.afterMount { withDomTag, _ ->
+                                            val parentNode = withDomTag.domNode.parentElement
+                                            horizontalScrollSize.update(
+                                                ScrollSize(
+                                                    parentNode?.clientWidth?.toDouble() ?: 0.0,
+                                                    parentNode?.scrollWidth?.toDouble() ?: 0.0
+                                                )
+                                            )
+                                        }
+                                    }
+                                }
+                                wheels.stopPropagation() handledBy {
+                                    if (abs(it.deltaX) >= abs(it.deltaY)) {
+                                        scrollDelta(it.deltaX, syncScrollLeftPosition, horizontalScrollSize)
+                                    } else {
+                                        scrollDelta(it.deltaY, syncScrollTopPosition, verticalScrollSize)
+                                    }
+                                }
+                            }
+                            div("inner-scrollbar-horizontal") {
+                                div("inner-scrollbar-horizontal-thumb") {
+                                    inlineStyle(
+                                        merge(horizontalScrollSize.data, syncScrollLeftPosition).map {
+                                            val area = horizontalScrollSize.current
+                                            "width: " + (this.domNode.parentElement!!.clientWidth * area.clientSize
+                                                / area.scrollSize).toString() + "px; " +
+                                                "left: " + (syncScrollLeftPosition.value * this.domNode.parentElement!!.clientWidth
+                                                / area.scrollSize).toString() + "px;"
+                                        }
                                     )
-                                )
+                                    mousedowns.stopPropagation().preventDefault() handledBy {
+                                        windowLevelMouseMoveUp {
+                                            scrollDelta(
+                                                (it as MouseEvent).movementX * horizontalScrollSize.current.scrollSize
+                                                    / this.domNode.parentElement!!.clientWidth,
+                                                syncScrollLeftPosition,
+                                                horizontalScrollSize
+                                            )
+                                        }
+                                    }
+                                    // スクロールバー上のクリックは無視
+                                    clicks.stopPropagation().preventDefault() handledBy {}
+                                }
+                                clicks.stopPropagation().preventDefault() handledBy {
+                                    val thumb =
+                                        this.domNode.querySelector(".inner-scrollbar-horizontal-thumb")
+                                            .unsafeCast<HTMLDivElement>()
+                                    val page = when {
+                                        it.clientX >= thumb.offsetLeft -> 1
+                                        it.clientX < (thumb.offsetLeft + thumb.offsetWidth) -> -1
+                                        else -> 0
+                                    }
+                                    scrollPage(
+                                        page,
+                                        this.domNode.clientWidth.toDouble(),
+                                        syncScrollLeftPosition,
+                                        horizontalScrollSize
+                                    )
+                                }
+                            }
+                            div("inner-scrollbar-vertical") {
+                                div("inner-scrollbar-vertical-thumb") {
+                                    inlineStyle(
+                                        merge(verticalScrollSize.data, syncScrollTopPosition).map {
+                                            val area = verticalScrollSize.current
+                                            "height: " + (this.domNode.parentElement!!.clientHeight * area.clientSize
+                                                / area.scrollSize).toString() + "px; " +
+                                                "top: " + (syncScrollTopPosition.value * this.domNode.parentElement!!.clientHeight
+                                                / area.scrollSize).toString() + "px;"
+                                        }
+                                    )
+                                    mousedowns.stopPropagation().preventDefault() handledBy {
+                                        windowLevelMouseMoveUp {
+                                            scrollDelta(
+                                                (it as MouseEvent).movementY * verticalScrollSize.current.scrollSize
+                                                    / this.domNode.parentElement!!.clientHeight,
+                                                syncScrollTopPosition,
+                                                verticalScrollSize
+                                            )
+                                        }
+                                    }
+                                    // スクロールバー上のクリックは無視
+                                    clicks.stopPropagation().preventDefault() handledBy {}
+                                }
+                                clicks.stopPropagation().preventDefault() handledBy {
+                                    val thumb =
+                                        this.domNode.querySelector(".inner-scrollbar-vertical-thumb")
+                                            .unsafeCast<HTMLDivElement>()
+                                    val page = when {
+                                        it.clientY >= thumb.offsetTop -> 1
+                                        it.clientY < (thumb.offsetTop + thumb.offsetHeight) -> -1
+                                        else -> 0
+                                    }
+                                    scrollPage(
+                                        page,
+                                        this.domNode.clientHeight.toDouble(),
+                                        syncScrollTopPosition,
+                                        verticalScrollSize
+                                    )
+                                }
                             }
                         }
                     }
-                    wheels.stopPropagation() handledBy {
-                        if (abs(it.deltaX) >= abs(it.deltaY)) {
-                            scrollDelta(it.deltaX, syncScrollLeftPosition, horizontalScrollSize)
-                        } else {
-                            scrollDelta(it.deltaY, syncScrollTopPosition, verticalScrollSize)
+
+                    "pageA" -> hr {}
+                    "pageB" -> button {
+                        +"boeee"
+                        clicks handledBy {
+                            window.sendToTty(99, "kiwamus9")
+                            //console.log(window.asDynamic()["sendToTty"])
+//                // val ff = document.querySelector(".finder-items-scroll-area")!!
+//                val ffTitle = document.querySelectorAll(".finder-titles").asList()
+//                val ffItem = document.querySelectorAll(".finder-items").asList()
+//                ffTitle.forEach { it.unsafeCast<HTMLDivElement>().scrollLeft += 40 }
+//                ffItem.forEach { it.unsafeCast<HTMLDivElement>().scrollLeft += 40 }
                         }
                     }
-                }
-                div("inner-scrollbar-horizontal") {
-                    div("inner-scrollbar-horizontal-thumb") {
-                        inlineStyle(
-                            merge(horizontalScrollSize.data, syncScrollLeftPosition).map {
-                                val area = horizontalScrollSize.current
-                                "width: " + (this.domNode.parentElement!!.clientWidth * area.clientSize
-                                    / area.scrollSize).toString() + "px; " +
-                                    "left: " + (syncScrollLeftPosition.value * this.domNode.parentElement!!.clientWidth
-                                    / area.scrollSize).toString() + "px;"
-                            }
-                        )
-                        mousedowns.stopPropagation().preventDefault() handledBy {
-                            windowLevelMouseMoveUp {
-                                scrollDelta(
-                                    (it as MouseEvent).movementX * horizontalScrollSize.current.scrollSize
-                                        / this.domNode.parentElement!!.clientWidth,
-                                    syncScrollLeftPosition,
-                                    horizontalScrollSize
-                                )
+
+                    else -> button {
+                        +"mmimi"
+                        clicks handledBy {
+                            console.log("hoe?")
+                            val hoe = document.getElementsByClassName("finder-row-items").asList()
+                            hoe.forEach {
+                                it.setAttribute("scrollTop", "40.0")
                             }
                         }
-                        // スクロールバー上のクリックは無視
-                        clicks.stopPropagation().preventDefault() handledBy {}
                     }
-                    clicks.stopPropagation().preventDefault() handledBy {
-                        val thumb =
-                            this.domNode.querySelector(".inner-scrollbar-horizontal-thumb")
-                                .unsafeCast<HTMLDivElement>()
-                        val page = when {
-                            it.clientX >= thumb.offsetLeft -> 1
-                            it.clientX < (thumb.offsetLeft + thumb.offsetWidth) -> -1
-                            else -> 0
-                        }
-                        scrollPage(
-                            page,
-                            this.domNode.clientWidth.toDouble(),
-                            syncScrollLeftPosition,
-                            horizontalScrollSize
-                        )
-                    }
-                }
-                div("inner-scrollbar-vertical") {
-                    div("inner-scrollbar-vertical-thumb") {
-                        inlineStyle(
-                            merge(verticalScrollSize.data, syncScrollTopPosition).map {
-                                val area = verticalScrollSize.current
-                                "height: " + (this.domNode.parentElement!!.clientHeight * area.clientSize
-                                    / area.scrollSize).toString() + "px; " +
-                                    "top: " + (syncScrollTopPosition.value * this.domNode.parentElement!!.clientHeight
-                                    / area.scrollSize).toString() + "px;"
-                            }
-                        )
-                        mousedowns.stopPropagation().preventDefault() handledBy {
-                            windowLevelMouseMoveUp {
-                                scrollDelta(
-                                    (it as MouseEvent).movementY * verticalScrollSize.current.scrollSize
-                                        / this.domNode.parentElement!!.clientHeight,
-                                    syncScrollTopPosition,
-                                    verticalScrollSize
-                                )
-                            }
-                        }
-                        // スクロールバー上のクリックは無視
-                        clicks.stopPropagation().preventDefault() handledBy {}
-                    }
-                    clicks.stopPropagation().preventDefault() handledBy {
-                        val thumb =
-                            this.domNode.querySelector(".inner-scrollbar-vertical-thumb")
-                                .unsafeCast<HTMLDivElement>()
-                        val page = when {
-                            it.clientY >= thumb.offsetTop -> 1
-                            it.clientY < (thumb.offsetTop + thumb.offsetHeight) -> -1
-                            else -> 0
-                        }
-                        scrollPage(
-                            page,
-                            this.domNode.clientHeight.toDouble(),
-                            syncScrollTopPosition,
-                            verticalScrollSize
-                        )
-                    }
-                }
-            }
-        }
-        hr {}
-        button {
-            +"boeee"
-            clicks handledBy {
-                // val ff = document.querySelector(".finder-items-scroll-area")!!
-                val ffTitle = document.querySelectorAll(".finder-titles").asList()
-                val ffItem = document.querySelectorAll(".finder-items").asList()
-                ffTitle.forEach { it.unsafeCast<HTMLDivElement>().scrollLeft += 40 }
-                ffItem.forEach { it.unsafeCast<HTMLDivElement>().scrollLeft += 40 }
-            }
-        }
-        button {
-            +"mmimi"
-            clicks handledBy {
-                console.log("hoe?")
-                val hoe = document.getElementsByClassName("finder-row-items").asList()
-                hoe.forEach {
-                    it.setAttribute("scrollTop", "40.0")
                 }
             }
         }

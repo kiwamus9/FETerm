@@ -4,6 +4,7 @@ import kotlinx.browser.window
 import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.events.Event
 import ext.electron.contextBridge
+import ext.electron.ipcRenderer
 import kotlin.time.measureTime
 
 
@@ -20,9 +21,20 @@ fun main() {
     )
 
     // contextBridge.exposeInMainWorld("ipcRenderer", ipcRenderer)
-    contextBridge.exposeInMainWorld("getWhatLocal", ::getWhatLocal)
-    contextBridge.exposeInMainWorld("getRawFstatListLocal", ::getRawFstatListLocal)
+    contextBridge.apply {
+        exposeInMainWorld("getWhatLocal", ::getWhatLocal)
+        exposeInMainWorld("getRawFstatListLocal", ::getRawFstatListLocal)
+        exposeInMainWorld("sendToTty", ::sendToTty)
+        exposeInMainWorld("onFromTty", ::onFromTty)
+    }
+}
 
+fun sendToTty(id: Int, param: String) {
+    ipcRenderer.send("to-tty", id, param)
+}
+
+fun onFromTty(listener: (Event, Int, String) -> Unit) {
+    ipcRenderer.on("from-tty", listener)
 }
 
 fun getWhatLocal(name: String): MutableList<String> {
@@ -43,14 +55,17 @@ fun getWhatLocal(name: String): MutableList<String> {
 //}
 
 
-    fun getRawFstatListLocal(fullPathDirName: String): String {
+fun getRawFstatListLocal(fullPathDirName: String): Array<dynamic> {
+    val rawFstatArray = arrayOf<dynamic>()
+    fs.readdirSync(fullPathDirName, "utf8").forEach {
+        console.log(it)
+    }
 //    var rawFstatArray = arrayOf()
 //    for (let fileName of fs.readdirSync(fullPathDirName)) {
 //        rawFstatArray.push(getRawFstatLocal(path.join(fullPathDirName, fileName)))
 //    }
-//    return rawFstatArray
-        return "hoeee"
-    }
+    return rawFstatArray
+}
 
 
 //contextBridge.exposeInMainWorld("ipcRenderer", ipcRenderer)

@@ -19,7 +19,7 @@ fun RenderContext.customSvg(
     baseClass: String? = null,
     id: String? = null,
     scope: (ScopeContext.() -> Unit) = {},
-    content: SvgTag.() -> Unit
+    content: SvgTag.() -> Unit,
 ): SvgTag =
     register(SvgTag(tagName, id, baseClass, job = job, openEvalScope(scope)), content)
 
@@ -30,7 +30,7 @@ val <T : EventTarget> WithEvents<T>.pointermove get() = subscribe<PointerEvent>(
 
 fun <T : Element> Tag<T>.afterMountReturnElem(
     payload: Any? = null,
-    handler: suspend (WithDomNode<Element>, Any?) -> Unit
+    handler: suspend (WithDomNode<Element>, Any?) -> Unit,
 ): Tag<T> {
     this.afterMount(payload, handler)
     return this
@@ -45,7 +45,7 @@ fun windowLevelMouseMoveUp(upFunc: (Event) -> Unit? = fun(_) {}, moveFunc: (Even
     // 2.wrappedUpFuncはリカーシブになっているので，無名変数を使って変数にいきなり代入するとエラーになるので
     //   無駄だけど，lateinitであとから代入
     lateinit var wrappedUpFunc: (Event) -> Unit
-    wrappedUpFunc = fun(e:Event): Unit {
+    wrappedUpFunc = fun(e: Event): Unit {
         upFunc(e)
         document.removeEventListener("mouseup", wrappedUpFunc)
         document.removeEventListener("mousemove", moveFunc)
@@ -76,6 +76,14 @@ inline fun Window.fileSizeSI(fileSize: Long): String =
 inline fun Window.getWhatLocal(name: String): MutableList<String> =
     asDynamic().getWhatLocal(name).unsafeCast<MutableList<String>>()
 
+inline fun Window.sendToTty(id: Int, param: String): Unit {
+    asDynamic().sendToTty(id, param)
+}
+inline fun Window.onFromTty(noinline listener: (Event, Int, String) -> Unit) {
+    asDynamic().onFromTty(listener)
+}
+
+
 //inline fun Window.createRemoteMachine():RemoteMachine =
 //    asDynamic().createRemoteMachine().unsafeCast<RemoteMachine>()
 
@@ -98,9 +106,9 @@ external interface PathPackage {
 
 object MainProcPathPackage :
     PathPackage by js("window.MainProcPathPackage").unsafeCast<PathPackage>() {
-    fun dirDepthCalc(fullPathName: String):Int  {
+    fun dirDepthCalc(fullPathName: String): Int {
         val sp = fullPathName.split(sep)
-        return if(sp[1].isBlank()) return 1 else sp.size
+        return if (sp[1].isBlank()) return 1 else sp.size
     }
 }
 

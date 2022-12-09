@@ -17,6 +17,8 @@ external class BrowserWindow(init: dynamic) {
 
 external interface WebContents {
     fun openDevTools(options: dynamic = definedExternally)
+    fun send(eventName: String, id:Int, param: String)
+    fun send(eventName: String, param: String)
 }
 
 // app
@@ -36,6 +38,17 @@ external interface ContextBridge {
 
 // ipcRenderer
 external val ipcRenderer: IpcRenderer
-external interface IpcRenderer {}
+external interface IpcRenderer {
+    fun send(eventName: String, id:Int, param: String)
+    fun send(eventName: String, param: String)
+    fun on(eventName: String, listener: (Event, Int, String) -> Unit)
+    fun on(eventName: String, listener: (Event, String) -> Unit)
+}
 
+// ipcMain
+external val ipcMain: IpcMain
+external interface IpcMain {
+    fun on(eventName: String, listener: (Event, Int, String) -> Unit)
+    fun on(eventName: String, listener: (Event, String) -> Unit)
+}
 

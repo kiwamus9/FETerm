@@ -4,16 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f790e7-e954-44a5-977a-aa6bc837f3f7" name="変更" comment="initial 3">
-      <change afterPath="$PROJECT_DIR$/preload/src/main/kotlin/ext" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/main_1_0_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/main_1_0_SNAPSHOT.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/preload_1_0_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/preload_1_0_SNAPSHOT.xml" afterDir="false" />
+    <list default="true" id="a8f790e7-e954-44a5-977a-aa6bc837f3f7" name="変更" comment="preloadとrenderの連携を確認．kotlinのデータタイプで大丈夫">
+      <change afterPath="$PROJECT_DIR$/main/src/main/kotlin/ext/node-pty.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/src/main/kotlin/model/xterm.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/render_1_0_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/render_1_0_SNAPSHOT.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electron/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/electron/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/electron/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kotlin-js-store/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/kotlin-js-store/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/kotlin/Main.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/src/main/kotlin/ext/electron.kt" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/kotlin/ext/electron.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/preload/src/main/kotlin/PreLoad.kt" beforeDir="false" afterPath="$PROJECT_DIR$/preload/src/main/kotlin/PreLoad.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/render/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/render/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/Finder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/kotlin/Finder.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/Utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/kotlin/Utils.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/src/main/resources/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/resources/index.html" afterDir="false" />
@@ -37,6 +39,9 @@
         <task path="$PROJECT_DIR$">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/render">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -44,12 +49,37 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="FETerm" type="f1a62948:ProjectNode" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FETerm" type="f1a62948:ProjectNode" />
+                <item name="render" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FETerm" type="f1a62948:ProjectNode" />
+                <item name="render" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FETerm" type="f1a62948:ProjectNode" />
+                <item name="render" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
             </expand>
             <select />
           </tree_state>
         </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+      </list>
+    </option>
   </component>
   <component name="FoldableProjectSettings">
     <option name="HIDE_IGNORED_FILES" value="false" />
@@ -80,11 +110,11 @@
     &quot;project.structure.last.edited&quot;: &quot;モジュール&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.20507812&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.27131784&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;FoldableProjectViewConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.FETerm [buildDevelop]">
     <configuration name="FETerm [buildDevelop]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -106,9 +136,31 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="FETerm:render [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/render" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.FETerm [buildDevelop]" />
+        <item itemvalue="Gradle.FETerm:render [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -122,7 +174,11 @@
       <updated>1670314952243</updated>
       <workItem from="1670314956290" duration="2443000" />
       <workItem from="1670318298662" duration="9827000" />
-      <workItem from="1670374785502" duration="245000" />
+      <workItem from="1670374785502" duration="3480000" />
+      <workItem from="1670566951564" duration="85000" />
+      <workItem from="1670567047969" duration="5127000" />
+      <workItem from="1670572202502" duration="11420000" />
+      <workItem from="1670591508975" duration="6048000" />
     </task>
     <task id="LOCAL-00001" summary="wakaran">
       <created>1670315161577</created>
@@ -152,7 +208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670318213158</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="preloadとrenderの連携を確認．kotlinのデータタイプで大丈夫">
+      <created>1670375303290</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1670375303290</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,6 +236,7 @@
     <MESSAGE value="wakaran" />
     <MESSAGE value="initial 2" />
     <MESSAGE value="initial 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial 3" />
+    <MESSAGE value="preloadとrenderの連携を確認．kotlinのデータタイプで大丈夫" />
+    <option name="LAST_COMMIT_MESSAGE" value="preloadとrenderの連携を確認．kotlinのデータタイプで大丈夫" />
   </component>
 </project>
