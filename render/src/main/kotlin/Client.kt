@@ -9,8 +9,6 @@ import kotlinx.browser.document
 import kotlinx.browser.window
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
-import model.ContextMenuItem
-import model.ItemAlign
 
 import org.w3c.dom.*
 import org.w3c.dom.events.Event
@@ -23,23 +21,23 @@ data class ContextMenuStatus(val isOpen: Boolean = false, val x: Int = 0, val y:
 val fileListHeadersItems =
     mutableListOf<ContextMenuItem>(
         //basename
-        ContextMenuItem("名前", "FLCol_basename", 150,true, true, true, ItemAlign.Left),
+        ContextMenuItem("名前", "FLCol_basename", 150, true, true, true, ItemAlign.Left),
         //mtime
-        ContextMenuItem("変更日", "FLCol_mtime", 150,true, false, true, ItemAlign.Left),
+        ContextMenuItem("変更日", "FLCol_mtime", 150, true, false, true, ItemAlign.Left),
         //birthTime
-        ContextMenuItem("作成日", "FLCol_birthTime", 150,true, false, true, ItemAlign.Left),
+        ContextMenuItem("作成日", "FLCol_birthTime", 150, true, false, true, ItemAlign.Left),
         //aTime
-        ContextMenuItem("最後に開いた日", "FLCol_aTime", 150,true, false, true, ItemAlign.Left),
+        ContextMenuItem("最後に開いた日", "FLCol_aTime", 150, true, false, true, ItemAlign.Left),
         //cTime
-        ContextMenuItem("追加日", "FLCol_cTime",   150,false, false, true, ItemAlign.Left),
+        ContextMenuItem("追加日", "FLCol_cTime", 150, false, false, true, ItemAlign.Left),
         //size
-        ContextMenuItem("サイズ", "FLCol_size", 150,true, false, true, ItemAlign.Right),
+        ContextMenuItem("サイズ", "FLCol_size", 150, true, false, true, ItemAlign.Right),
         //type
-        ContextMenuItem("種類", "FLCol_type", 150,true, false, true, ItemAlign.Left),
+        ContextMenuItem("種類", "FLCol_type", 150, true, false, true, ItemAlign.Left),
         //mode
-        ContextMenuItem("モード", "FLCol_mode", 150,false, false, true, ItemAlign.Right),
+        ContextMenuItem("モード", "FLCol_mode", 150, false, false, true, ItemAlign.Right),
         //username
-        ContextMenuItem("所有者", "FLCol_username",    150,false, false, true, ItemAlign.Right),
+        ContextMenuItem("所有者", "FLCol_username", 150, false, false, true, ItemAlign.Right),
     )
 
 

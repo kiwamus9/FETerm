@@ -1,7 +1,5 @@
-import FileItemListStore.job
 import dev.fritz2.core.*
 import kotlinx.browser.document
-import model.TerminalSession
 import org.w3c.dom.*
 import org.w3c.dom.Window
 import org.w3c.dom.css.CSSStyleRule

@@ -2,10 +2,10 @@
 
 package components
 
-import model.ContextMenuItem
+import ContextMenuItem
 import dev.fritz2.core.Lens
 import dev.fritz2.core.lens
-import model.ItemAlign
+import ItemAlign
 
 fun ContextMenuItem.Companion.label(): Lens<ContextMenuItem, String> = lens(
     "label",

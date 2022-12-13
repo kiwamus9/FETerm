@@ -4,7 +4,6 @@ import ext.electron.BrowserWindow
 import ext.electron.BrowserWindowOptions
 import ext.electron.ipcMain
 import ext.nodePty.SpawnOptions
-import model.TerminalSession
 import org.w3c.dom.events.Event
 import path.path
 

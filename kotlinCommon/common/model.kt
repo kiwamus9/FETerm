@@ -1,5 +1,3 @@
-package model
-
 @Suppress("unused") // TODO
 enum class TerminalSessionType {
     Local, SSH, Telnet, Ftp
