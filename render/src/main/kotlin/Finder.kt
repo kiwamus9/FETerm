@@ -7,9 +7,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import model.ContextMenuItem
-import model.divFlexBasis
-import model.isSortKey
-import model.sortToBigger
+import model.TerminalSession
+
 import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.Window
 import org.w3c.dom.asList
@@ -17,7 +16,11 @@ import org.w3c.dom.events.Event
 import org.w3c.dom.events.MouseEvent
 import kotlin.math.abs
 
-
+inline fun jsObject(init: dynamic.() -> Unit): dynamic {
+    val o = js("{}")
+    init(o)
+    return o
+}
 
 object FinderHeaderItemStore : RootStore<List<ContextMenuItem>>(fileListHeadersItems.toList()) {
     val change = handle<ContextMenuItem> { oldList, changedItem ->
@@ -247,17 +250,10 @@ fun main() {
     console.log(window.getWhatLocal("kiwamu"))
     //kotlinext.js.require("bootstrap/dist/css/bootstrap.css")
     val xx = kotlinext.js.require("xterm/css/xterm.css")
-    console.log(xx)
 
-    console.log(Terminal())
     val currentDir = "/Users/kiwamu/Downloads"
     val fileItemDataList = FileItemDataList(currentDir)
 
-
-    window.onFromTty { event: Event, i: Int, s: String ->
-        console.log("eee")
-        console.log("${event}:${i}:${s}")
-    }
 
     render("#target") {
         FileItemListStore.setup(fileItemDataList)
@@ -281,7 +277,7 @@ fun main() {
             clicks handledBy { router.update("welcome") }
         }
         button {
-            +"pageA"
+            +"terminal"
             clicks handledBy { router.update("pageA") }
         }
         button {
@@ -475,17 +471,30 @@ fun main() {
                         }
                     }
 
-                    "pageA" -> hr {}
-                    "pageB" -> button {
-                        +"boeee"
-                        clicks handledBy {
-                            window.sendToTty(99, "kiwamus9")
-                            //console.log(window.asDynamic()["sendToTty"])
-//                // val ff = document.querySelector(".finder-items-scroll-area")!!
-//                val ffTitle = document.querySelectorAll(".finder-titles").asList()
-//                val ffItem = document.querySelectorAll(".finder-items").asList()
-//                ffTitle.forEach { it.unsafeCast<HTMLDivElement>().scrollLeft += 40 }
-//                ffItem.forEach { it.unsafeCast<HTMLDivElement>().scrollLeft += 40 }
+                    "terminal" -> renderTerminal()
+                    "pageB" -> div {
+                        div(id = "term") {}
+                        button {
+                            +"boeee"
+                            clicks handledBy {
+                                //window.sendToTty(99, "kiwamus9")
+                                window.terminalCreate(
+                                    jsObject {
+                                        dnsName = "local"
+                                        passwd = "kiwamu"
+                                        terminalType = "xterm-256color"
+                                    }).then { terminalSession ->
+                                    val term = Terminal()
+                                    term.open(document.getElementById("term") as HTMLDivElement)
+                                    term.onData { text ->
+                                        window.terminalSendText(terminalSession.sessionID, text)
+                                    }
+                                    window.terminalGetText { event, id, text ->
+                                        term.write(text)
+                                    }
+                                }
+
+                            }
                         }
                     }
 

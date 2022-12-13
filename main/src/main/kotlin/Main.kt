@@ -1,8 +1,8 @@
-import NodeJS.Dict
 import NodeJS.get
 import ext.electron.App
 import ext.electron.BrowserWindow
 import ext.electron.ipcMain
+import model.TerminalSession
 import org.w3c.dom.events.Event
 import path.path
 
@@ -30,15 +30,87 @@ fun createWindow() {
     }
 }
 
-fun toTty(event: Event, id: Int, param: String) {
-    console.log(event)
-    console.log(id)
-    console.log(param)
-    fromTty()
+/*
+    terminal:create
+    terminal:sendText
+    terminal:getText
+    terminal:sendData
+    terminal:getData
+    terminal:close
+
+ */
+
+interface TerminalSessionProcess {
+    fun onData(listener: (String) -> Unit)
+    fun resize(cols: Int, rows: Int)
+    fun write(string: String)
 }
 
-fun fromTty() {
-    mainWindow.webContents.send("from-tty", 1, "hoem")
+object TerminalSessions {
+    private val map = mutableMapOf<TerminalSession, TerminalSessionProcess>()
+
+    fun add(terminalSession: TerminalSession, sessionProcess: TerminalSessionProcess) {
+        map[terminalSession] = sessionProcess
+    }
+
+    fun get(terminalSession: TerminalSession): TerminalSessionProcess? {
+        return map[terminalSession]
+    }
+
+    fun sessionProcess(id: Int): TerminalSessionProcess {
+        return map[map.keys.first { it.sessionID == id }]!!
+    }
+}
+
+class LocalTerminalSessionProcess(private var terminalSession: TerminalSession) : TerminalSessionProcess {
+    private val shell: String = if (os.platform() == "win32") "powershell.exe" else "bash"
+    private val ptyProcess = ext.nodePty.spawn(shell, arrayOf(),
+        jsObject {
+            name = terminalSession.terminalType
+            cols = terminalSession.cols
+            rows = terminalSession.rows
+            cwd = process.env["HOME"]
+            env = process.env
+        })
+
+    init {
+        onData {
+//            console.log(it)
+            mainWindow.webContents.send("terminal:getText", terminalSession.sessionID, it)
+        }
+    }
+
+    override fun onData(listener: (String) -> Unit) {
+        ptyProcess.onData(listener)
+    }
+
+    override fun resize(cols: Int, rows: Int) {
+        ptyProcess.resize(cols, rows)
+    }
+
+    override fun write(string: String) {
+        ptyProcess.write(string)
+    }
+}
+
+fun terminalSessionCreate(@Suppress("unused") event: Event, param: dynamic): TerminalSession {
+    //dnsName: String, passwd: String
+    val dnsName = param["dnsName"] as String
+    val passwd = param["passwd"] as String
+    val terminalType = param["terminalType"] as String
+
+    val ts = TerminalSession(dnsName = dnsName, terminalType = terminalType)
+    TerminalSessions.add(ts, LocalTerminalSessionProcess(ts))
+
+    return ts
+}
+
+fun terminalSendText(@Suppress("unused") event: Event, id: Int, text: String) {
+    TerminalSessions.sessionProcess(id).write(text)
+}
+
+fun terminalGetText(id: Int, text: String) {
+    mainWindow.webContents.send("terminal:getText", id, text)
 }
 
 fun main() {
@@ -47,29 +119,14 @@ fun main() {
     val app2 = electron.app.unsafeCast<App>()
     app2.whenReady().then {
         createWindow()
-        ipcMain.on("to-tty", ::toTty)
         app2.on("activate") {
             // macOS では、Dock アイコンのクリック時に他に開いているウインドウがない
             // 場合、アプリのウインドウを再作成するのが一般的です。
             if (BrowserWindow.getAllWindows().isEmpty()) createWindow()
         }
 
-        val shell = if (os.platform() == "win32") "powershell.exe" else "bash"
-        val ptyProcess = ext.nodePty.spawn(shell, arrayOf<String>(),
-            jsObject {
-                name = "xterm-color"
-                cols = 80
-                rows = 30
-                cwd = process.env["HOME"]
-                env = process.env
-            });
-        // console.log(ptyProcess)
-        ptyProcess.onData{
-            console.log(it)
-        }
-        ptyProcess.write("ls -l\n")
-        ptyProcess.resize(40, 40)
-        ptyProcess.write("ls -\n")
+        ipcMain.on("terminal:sendText", ::terminalSendText)
+        ipcMain.handle("terminal:create", ::terminalSessionCreate)
     }
 
     app2.on("window-all-closed") {

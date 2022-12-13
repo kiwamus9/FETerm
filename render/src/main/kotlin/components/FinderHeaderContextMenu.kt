@@ -1,7 +1,6 @@
 package components
 
 import model.ContextMenuItem
-import model.isShow
 
 import FinderHeaderItemStore
 import dev.fritz2.core.RenderContext

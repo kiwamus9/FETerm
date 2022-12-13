@@ -1,12 +1,9 @@
-import fs.Stats
 import kotlinx.browser.document
 import kotlinx.browser.window
-import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.events.Event
 import ext.electron.contextBridge
 import ext.electron.ipcRenderer
-import kotlin.time.measureTime
-
+import model.TerminalSession
 
 fun main() {
     window.addEventListener("DOMContentLoaded",
@@ -20,21 +17,20 @@ fun main() {
         }
     )
 
-    // contextBridge.exposeInMainWorld("ipcRenderer", ipcRenderer)
     contextBridge.apply {
         exposeInMainWorld("getWhatLocal", ::getWhatLocal)
         exposeInMainWorld("getRawFstatListLocal", ::getRawFstatListLocal)
-        exposeInMainWorld("sendToTty", ::sendToTty)
-        exposeInMainWorld("onFromTty", ::onFromTty)
+        // terminal
+        exposeInMainWorld("terminalSendText", fun(id: Int, text:String) {
+            ipcRenderer.send("terminal:sendText",id, text)
+        })
+        exposeInMainWorld("terminalCreate", fun(params: dynamic): TerminalSession {
+            return ipcRenderer.invoke<TerminalSession>("terminal:create", params)
+        })
+        exposeInMainWorld("terminalGetText", fun(listener: (Event, Int, String) -> Unit) {
+            ipcRenderer.on("terminal:getText", listener)
+        })
     }
-}
-
-fun sendToTty(id: Int, param: String) {
-    ipcRenderer.send("to-tty", id, param)
-}
-
-fun onFromTty(listener: (Event, Int, String) -> Unit) {
-    ipcRenderer.on("from-tty", listener)
 }
 
 fun getWhatLocal(name: String): MutableList<String> {

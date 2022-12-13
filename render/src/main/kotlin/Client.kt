@@ -1,4 +1,6 @@
 import components.bootstrapIcon
+import components.isShow
+import components.sortToBigger
 import components.svgFileIcon
 
 import dev.fritz2.core.*
@@ -9,8 +11,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import model.ContextMenuItem
 import model.ItemAlign
-import model.isShow
-import model.sortToBigger
 
 import org.w3c.dom.*
 import org.w3c.dom.events.Event
@@ -119,7 +119,7 @@ fun main_old() {
         var cssSelectorText = ""
 
         // 変数化しないとremoveEventListenerできない．．
-        // lateinitしないと，リカーシブなので，自分内で自分をremoveできない．．
+        // late initしないと，リカーシブなので，自分内で自分をremoveできない．．
         lateinit var mouseUp: (Event) -> Unit
         lateinit var mouseMove: (Event) -> Unit
 

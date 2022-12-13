@@ -1,45 +1,9 @@
-package model
+package components
 
+import model.ContextMenuItem
 import dev.fritz2.core.Lens
-import dev.fritz2.core.Lenses
 import dev.fritz2.core.lens
-
-@Lenses
-data class Name(val firstname: String, val lastname: String) {
-    companion object
-}
-
-@Lenses
-data class Person(val name: Name, var description: String) {
-    companion object
-}
-
-@Lenses
-data class TableHeaderItem(var label: String, var width: Double, var minWidth: Double) {
-    companion object
-}
-
-@Lenses
-data class Muu(val guu: String){
-    companion object
-}
-
-enum class ItemAlign {
-    Left, Center, Right
-}
-
-data class ContextMenuItem(
-    val label: String,
-    val divID: String,
-    val divFlexBasis: Int,
-    val isShow: Boolean,
-    val isSortKey: Boolean,
-    val sortToBigger: Boolean,
-    val itemAlign: ItemAlign,
-) {
-    companion object
-}
-
+import model.ItemAlign
 
 public fun ContextMenuItem.Companion.label(): Lens<ContextMenuItem, String> = lens(
     "label",

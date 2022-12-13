@@ -2,6 +2,7 @@
 
 package ext.electron
 
+import model.TerminalSession
 import org.w3c.dom.events.Event
 import kotlin.js.Promise
 
@@ -43,6 +44,9 @@ external interface IpcRenderer {
     fun send(eventName: String, param: String)
     fun on(eventName: String, listener: (Event, Int, String) -> Unit)
     fun on(eventName: String, listener: (Event, String) -> Unit)
+    fun <T> invoke(eventName: String, params: dynamic): T
+
+
 }
 
 // ipcMain
@@ -50,5 +54,6 @@ external val ipcMain: IpcMain
 external interface IpcMain {
     fun on(eventName: String, listener: (Event, Int, String) -> Unit)
     fun on(eventName: String, listener: (Event, String) -> Unit)
+    fun <T> handle(eventName: String, listener: (Event, dynamic) -> T)
 }
 

@@ -1,6 +1,8 @@
 import FileItemListStore.job
 import dev.fritz2.core.*
+import ext.electron.ipcRenderer
 import kotlinx.browser.document
+import model.TerminalSession
 import org.w3c.dom.*
 import org.w3c.dom.Window
 import org.w3c.dom.css.CSSStyleRule
@@ -9,6 +11,7 @@ import org.w3c.dom.events.Event
 import org.w3c.dom.events.EventTarget
 import org.w3c.dom.events.MouseEvent
 import org.w3c.dom.pointerevents.PointerEvent
+import kotlin.js.Promise
 
 fun RenderContext.openEvalScope(context: (ScopeContext.() -> Unit)): Scope {
     return ScopeContext(this.scope).apply(context).scope
@@ -76,12 +79,21 @@ inline fun Window.fileSizeSI(fileSize: Long): String =
 inline fun Window.getWhatLocal(name: String): MutableList<String> =
     asDynamic().getWhatLocal(name).unsafeCast<MutableList<String>>()
 
-inline fun Window.sendToTty(id: Int, param: String): Unit {
-    asDynamic().sendToTty(id, param)
+// terminal
+inline fun Window.terminalCreate(params: dynamic): Promise<TerminalSession> {
+    return asDynamic().terminalCreate(params).unsafeCast<Promise<TerminalSession>>()
 }
-inline fun Window.onFromTty(noinline listener: (Event, Int, String) -> Unit) {
-    asDynamic().onFromTty(listener)
+
+inline fun Window.terminalSendText(id: Int, text: String) {
+    asDynamic().terminalSendText(id, text)
 }
+
+inline fun Window.terminalGetText(noinline listener: (Event, Int, String) -> Unit) {
+    asDynamic().terminalGetText(listener)
+}
+//exposeInMainWorld("terminalGetText", fun(listener: (Event, Int, String) -> Unit) {
+//    ipcRenderer.on("terminal:getText", listener)
+//})
 
 
 //inline fun Window.createRemoteMachine():RemoteMachine =

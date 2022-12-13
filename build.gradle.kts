@@ -27,7 +27,6 @@ project("main") {
 }
 
 project("preload") {
-
     tasks.register<Copy>("copyDevelopOutputs") {
         dependsOn("developmentExecutableCompileSync")
         from(layout.buildDirectory.dir("compileSync/main/developmentExecutable/kotlin"))
@@ -45,7 +44,6 @@ project("render") {
         dependsOn("browserDevelopmentWebpack")
         from(layout.buildDirectory.dir("developmentExecutable"))
         into(electronPath)
-
     }
     tasks.register<Copy>("copyProductionOutputs") {
         dependsOn("browserProductionWebpack")
@@ -53,47 +51,3 @@ project("render") {
         into(electronPath)
     }
 }
-
-//
-//tasks.register<Copy>("buildDevelop2") {
-//    dependsOn(":main:productionExecutableCompileSync", ":preload:build", ":render:browserDevelopmentWebpack")
-//
-//    from(layout.projectDirectory.dir("build/js/packages/FETerm-main/kotlin"))
-//    // include("*.*")
-//    println(layout.projectDirectory.dir("hoe"))
-//    into(layout.projectDirectory.dir("hoe"))
-//
-////    from(layout.projectDirectory.dir("build/js/packages/FETerm-preload/kotlin"))
-////    // include("*.*")
-////    into(layout.projectDirectory.dir("hoe"))
-//
-//    from(layout.projectDirectory.dir("render/build/developmentExecutable"))
-//    // include("*.*")
-//    into(layout.projectDirectory.dir("electron"))
-//
-//
-//    doLast {
-//
-//        println("I'm ${this.project.name}")
-//    }
-//}
-//
-//tasks.register<Copy>("buildProduction2") {
-//    dependsOn(":main:productionExecutableCompileSync", ":preload:build", ":render:browserProductionWebpack")
-//
-//    from(layout.projectDirectory.dir("build/js/packages/FETerm-main/kotlin"))
-//    // include("*.*")
-//    into(layout.projectDirectory.dir("hoe"))
-//
-//
-////    from(layout.projectDirectory.dir("build/js/packages/FETerm-preload/kotlin"))
-////    // include("*.*")
-////    into(layout.projectDirectory.dir("hoe"))
-//    from(layout.projectDirectory.dir("render/build/distributions"))
-//    // include("*.*")
-//    into(layout.projectDirectory.dir("electron"))
-//
-//    doLast {
-//        println("I'm ${this.project.name}")
-//    }
-//}
