@@ -1,5 +1,6 @@
 @file:JsModule("html-to-image")
 @file:JsNonModule
+@file:Suppress("unused")
 
 import org.w3c.dom.Element
 import org.w3c.dom.HTMLCanvasElement

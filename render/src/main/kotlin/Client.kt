@@ -43,7 +43,7 @@ val fileListHeadersItems =
     )
 
 
-fun main_old() {
+fun mainOld() {
     console.log(getFileItemListLocal("/"))
     val fileListContextMenuItemStore = object : RootStore<List<ContextMenuItem>>(fileListHeadersItems.toList()) {
         public val change = handle<ContextMenuItem> { _, changedItem ->

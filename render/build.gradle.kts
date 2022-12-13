@@ -23,6 +23,9 @@ dependencies {
 }
 
 kotlin {
+    sourceSets["main"].apply {
+        kotlin.srcDir(layout.projectDirectory.dir("../kotlinCommon/common"))
+    }
     js(IR) {
         binaries.executable()
         browser {
@@ -33,5 +36,11 @@ kotlin {
                 }
             }
         }
+    }
+}
+
+tasks.named("developmentExecutableCompileSync") {
+    doLast {
+        println(layout.projectDirectory.dir("../kotlinCommon/"))
     }
 }

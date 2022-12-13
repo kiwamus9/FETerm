@@ -2,11 +2,20 @@
 
 package ext.electron
 
-import model.TerminalSession
 import org.w3c.dom.events.Event
 import kotlin.js.Promise
 
 // BrowserWindow
+external interface BrowserWindowOptions {
+    interface WebPreferencesOptions {
+        var nodeIntegration: Boolean
+        var preload: String
+    }
+    var width: Int
+    var height: Int
+    var webPreferences: WebPreferencesOptions
+}
+
 external class BrowserWindow(init: dynamic) {
     val webContents: WebContents
     fun loadFile(filePath: String): Unit
@@ -45,8 +54,6 @@ external interface IpcRenderer {
     fun on(eventName: String, listener: (Event, Int, String) -> Unit)
     fun on(eventName: String, listener: (Event, String) -> Unit)
     fun <T> invoke(eventName: String, params: dynamic): T
-
-
 }
 
 // ipcMain

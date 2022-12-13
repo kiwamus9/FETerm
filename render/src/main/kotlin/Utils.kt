@@ -1,6 +1,5 @@
 import FileItemListStore.job
 import dev.fritz2.core.*
-import ext.electron.ipcRenderer
 import kotlinx.browser.document
 import model.TerminalSession
 import org.w3c.dom.*
@@ -46,9 +45,9 @@ fun windowLevelMouseMoveUp(upFunc: (Event) -> Unit? = fun(_) {}, moveFunc: (Even
     // 1.addEventListenerをremoveEventListenerするためには，なぜか変数化しないとだめ
     //   ::wrappedUpFuncではremoveできない
     // 2.wrappedUpFuncはリカーシブになっているので，無名変数を使って変数にいきなり代入するとエラーになるので
-    //   無駄だけど，lateinitであとから代入
+    //   無駄だけど，late initであとから代入
     lateinit var wrappedUpFunc: (Event) -> Unit
-    wrappedUpFunc = fun(e: Event): Unit {
+    wrappedUpFunc = fun(e: Event) {
         upFunc(e)
         document.removeEventListener("mouseup", wrappedUpFunc)
         document.removeEventListener("mousemove", moveFunc)

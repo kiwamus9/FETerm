@@ -1,25 +1,21 @@
 import NodeJS.get
 import ext.electron.App
 import ext.electron.BrowserWindow
+import ext.electron.BrowserWindowOptions
 import ext.electron.ipcMain
+import ext.nodePty.SpawnOptions
 import model.TerminalSession
 import org.w3c.dom.events.Event
 import path.path
-
-inline fun jsObject(init: dynamic.() -> Unit): dynamic {
-    val o = js("{}")
-    init(o)
-    return o
-}
 
 lateinit var mainWindow: BrowserWindow
 
 fun createWindow() {
     mainWindow = BrowserWindow(
-        jsObject {
+        jsOptions<BrowserWindowOptions> {
             width = 800
             height = 800
-            webPreferences = jsObject {
+            webPreferences = jsOptions {
                 nodeIntegration = false
                 preload = path.join(__dirname, "../preloadProcess/FETerm-preload.js")
             }
@@ -65,7 +61,7 @@ object TerminalSessions {
 class LocalTerminalSessionProcess(private var terminalSession: TerminalSession) : TerminalSessionProcess {
     private val shell: String = if (os.platform() == "win32") "powershell.exe" else "bash"
     private val ptyProcess = ext.nodePty.spawn(shell, arrayOf(),
-        jsObject {
+        jsOptions<SpawnOptions> {
             name = terminalSession.terminalType
             cols = terminalSession.cols
             rows = terminalSession.rows
@@ -75,7 +71,6 @@ class LocalTerminalSessionProcess(private var terminalSession: TerminalSession) 
 
     init {
         onData {
-//            console.log(it)
             mainWindow.webContents.send("terminal:getText", terminalSession.sessionID, it)
         }
     }
@@ -93,10 +88,10 @@ class LocalTerminalSessionProcess(private var terminalSession: TerminalSession) 
     }
 }
 
-fun terminalSessionCreate(@Suppress("unused") event: Event, param: dynamic): TerminalSession {
+fun terminalSessionCreate(@Suppress("UNUSED_PARAMETER") event: Event, param: dynamic): TerminalSession {
     //dnsName: String, passwd: String
     val dnsName = param["dnsName"] as String
-    val passwd = param["passwd"] as String
+    //val passwd = param["passwd"] as String
     val terminalType = param["terminalType"] as String
 
     val ts = TerminalSession(dnsName = dnsName, terminalType = terminalType)
@@ -105,18 +100,15 @@ fun terminalSessionCreate(@Suppress("unused") event: Event, param: dynamic): Ter
     return ts
 }
 
-fun terminalSendText(@Suppress("unused") event: Event, id: Int, text: String) {
+fun terminalSendText(@Suppress("UNUSED_PARAMETER") event: Event, id: Int, text: String) {
     TerminalSessions.sessionProcess(id).write(text)
-}
-
-fun terminalGetText(id: Int, text: String) {
-    mainWindow.webContents.send("terminal:getText", id, text)
 }
 
 fun main() {
     require("electron-reloader").unsafeCast<(NodeModule) -> Unit>()(module)
     val electron = require("electron").unsafeCast<dynamic>()
     val app2 = electron.app.unsafeCast<App>()
+
     app2.whenReady().then {
         createWindow()
         app2.on("activate") {

@@ -1,12 +1,13 @@
 package model
 
+@Suppress("unused") // TODO
 enum class TerminalSessionType {
     Local, SSH, Telnet, Ftp
 }
 
 data class TerminalSession (
     val name: String = "local",
-    val sessionID: Int = TerminalSession.getSessionID(),
+    val sessionID: Int = getSessionID(),
     val dnsName: String = "local",
     val port: Int? = null,
     val type: TerminalSessionType = TerminalSessionType.Local,
@@ -20,18 +21,10 @@ data class TerminalSession (
         fun getSessionID(): Int {
             return(++sessionIDSource)
         }
-        fun create(dnsName: String, passwd: String): TerminalSession {
-            return TerminalSession(dnsName = dnsName)
-        }
     }
-
-    fun sendText(text: String) {
-
-    }
-
-    fun onReceiveText() {}
 }
 
+@Suppress("unused")
 enum class ItemAlign {
     Left, Center, Right
 }

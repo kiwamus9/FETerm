@@ -4,28 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f790e7-e954-44a5-977a-aa6bc837f3f7" name="変更" comment="main,render間の非同期通信&#10;node-ptyをrebuildで導入&#10;xtermをrender側だけに導入&#10;・build.gradle-&gt; npm&#10;・kotlinext.js.require">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/src/main/kotlin/ext/xterm.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/src/main/kotlin/model/model.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/render/src/main/kotlin/components/Lenses.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/render/src/main/kotlin/components/Terminal.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a8f790e7-e954-44a5-977a-aa6bc837f3f7" name="変更" comment="xtermの双方向通信完成">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/render_1_0_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/render_1_0_SNAPSHOT.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/electron/original/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/electron/original/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/electron/original/preload.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/main/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/main/kotlin/ext/electron.kt" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/kotlin/ext/electron.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preload/src/main/kotlin/PreLoad.kt" beforeDir="false" afterPath="$PROJECT_DIR$/preload/src/main/kotlin/PreLoad.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/main/kotlin/export.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/main/kotlin/ext/electron.kt" beforeDir="false" afterPath="$PROJECT_DIR$/kotlinCommon/node/electron.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/main/kotlin/ext/node-pty.kt" beforeDir="false" afterPath="$PROJECT_DIR$/kotlinCommon/node/node-pty.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/main/kotlin/ext/xterm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/kotlinCommon/common/xterm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/main/kotlin/model/model.kt" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/kotlin/model/model.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preload/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/preload/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preload/src/main/kotlin/ext" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/render/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/render/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/kotlin/Client.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/FileList.kt" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/kotlin/FileList.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/Finder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/kotlin/Finder.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/Utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/kotlin/Utils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/Welcome.kt" beforeDir="false" afterPath="$PROJECT_DIR$/kotlinCommon/common/Util.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/components/FinderHeaderContextMenu.kt" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/kotlin/components/FinderHeaderContextMenu.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/model/model.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/model/xterm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/components/Lenses.kt" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/kotlin/components/Lenses.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/components/SimpleBar.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/htmlToImage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/kotlin/htmlToImage.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +85,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Class" />
+        <option value="Kotlin File" />
       </list>
     </option>
   </component>
@@ -117,13 +118,19 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;問題&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;モジュール&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.20507812&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.27131784&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/kotlinCommon/common" />
+      <recent name="$PROJECT_DIR$/kotlinCommon/node" />
+    </key>
+  </component>
   <component name="RunManager" selected="Gradle.FETerm [buildDevelop]">
     <configuration name="FETerm [buildDevelop]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -201,7 +208,8 @@
       <workItem from="1670900176410" duration="2010000" />
       <workItem from="1670902517164" duration="1039000" />
       <workItem from="1670903568291" duration="16795000" />
-      <workItem from="1670932796022" duration="4748000" />
+      <workItem from="1670932796022" duration="7827000" />
+      <workItem from="1670943131583" duration="3319000" />
     </task>
     <task id="LOCAL-00001" summary="wakaran">
       <created>1670315161577</created>
@@ -245,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670598508652</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="xtermの双方向通信完成">
+      <created>1670940374131</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1670940374131</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,6 +283,7 @@
     <MESSAGE value="initial 3" />
     <MESSAGE value="preloadとrenderの連携を確認．kotlinのデータタイプで大丈夫" />
     <MESSAGE value="main,render間の非同期通信&#10;node-ptyをrebuildで導入&#10;xtermをrender側だけに導入&#10;・build.gradle-&gt; npm&#10;・kotlinext.js.require" />
-    <option name="LAST_COMMIT_MESSAGE" value="main,render間の非同期通信&#10;node-ptyをrebuildで導入&#10;xtermをrender側だけに導入&#10;・build.gradle-&gt; npm&#10;・kotlinext.js.require" />
+    <MESSAGE value="xtermの双方向通信完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="xtermの双方向通信完成" />
   </component>
 </project>

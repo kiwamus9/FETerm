@@ -7,10 +7,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import model.ContextMenuItem
-import model.TerminalSession
 
 import org.w3c.dom.HTMLDivElement
-import org.w3c.dom.Window
 import org.w3c.dom.asList
 import org.w3c.dom.events.Event
 import org.w3c.dom.events.MouseEvent
@@ -56,7 +54,7 @@ fun RenderContext.finderTitle(
         // 1.addEventListenerをremoveEventListenerするためには，なぜか変数化しないとだめ
         //   ::mouseUpではremoveできない
         // 2.mouseUpはリカーシブになっているので，無名変数を使って変数にいきなり代入するとエラーになるので
-        //   無駄だけど，lateinitであとから代入
+        //   無駄だけど，late initであとから代入
         val mouseMove = fun(e: Event) {
             val diffX = (e as MouseEvent).pageX - pageX
             syncFlexBasis.intSize((initialFlexBasis + diffX).toInt())
@@ -249,7 +247,7 @@ fun main() {
 
     console.log(window.getWhatLocal("kiwamu"))
     //kotlinext.js.require("bootstrap/dist/css/bootstrap.css")
-    val xx = kotlinext.js.require("xterm/css/xterm.css")
+    kotlinext.js.require("xterm/css/xterm.css")
 
     val currentDir = "/Users/kiwamu/Downloads"
     val fileItemDataList = FileItemDataList(currentDir)
@@ -475,7 +473,7 @@ fun main() {
                     "pageB" -> div {
                         div(id = "term") {}
                         button {
-                            +"boeee"
+                            +"kiwamu1"
                             clicks handledBy {
                                 //window.sendToTty(99, "kiwamus9")
                                 window.terminalCreate(
@@ -489,7 +487,8 @@ fun main() {
                                     term.onData { text ->
                                         window.terminalSendText(terminalSession.sessionID, text)
                                     }
-                                    window.terminalGetText { event, id, text ->
+
+                                    window.terminalGetText { _, _, text -> // event, id, text
                                         term.write(text)
                                     }
                                 }
@@ -499,7 +498,7 @@ fun main() {
                     }
 
                     else -> button {
-                        +"mmimi"
+                        +"kiwamu2"
                         clicks handledBy {
                             console.log("hoe?")
                             val hoe = document.getElementsByClassName("finder-row-items").asList()

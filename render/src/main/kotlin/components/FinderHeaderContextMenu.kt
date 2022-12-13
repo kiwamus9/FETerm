@@ -20,7 +20,7 @@ object FinderHeaderContextMenuStore :
     val open = handle { oldStatus ->
         FinderHeaderContextMenuStatus(true, oldStatus.x, oldStatus.y)
     }
-    val openAt = handle<Pair<Int, Int>> { _, position: Pair<Int, Int> ->
+    val openAt = handle { _, position: Pair<Int, Int> ->
         FinderHeaderContextMenuStatus(true, position.first, position.second)
     }
 }

@@ -1,7 +1,6 @@
 import dev.fritz2.core.RootStore
 import kotlinx.browser.window
 import kotlin.js.Date
-import kotlin.math.log
 import kotlin.math.pow
 import kotlin.math.roundToLong
 
@@ -137,7 +136,7 @@ fun fileNameHumanizer(fileName: String): String {
 
 fun fileSizeHumanizer(fileSize: Long, fileType: FileType): String {
     val exponentUnit = listOf<String>("Byte", "KB", "MB", "GB", "TB", "EB", "PB")
-    val cardinalNumberBase: Double = 1000.0
+    val cardinalNumberBase = 1000.0
 
     //通常ファイルでなければ計算しない
     if (fileType != FileType.S_IFREG) return "--"
