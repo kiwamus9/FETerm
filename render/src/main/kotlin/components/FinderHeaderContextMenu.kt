@@ -1,10 +1,9 @@
 package components
 
-import ContextMenuItem
-
 import FinderHeaderItemStore
 import dev.fritz2.core.RenderContext
 import dev.fritz2.core.RootStore
+import kotlinCommon.common.model.ContextMenuItem
 import kotlinx.browser.document
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge

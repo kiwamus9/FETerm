@@ -1,9 +1,10 @@
 import kotlinx.browser.document
 import kotlinx.browser.window
 import org.w3c.dom.events.Event
-import ext.electron.contextBridge
-import ext.electron.ipcRenderer
-import model.TerminalSession
+import kotlinCommon.node.electron.contextBridge
+import kotlinCommon.node.electron.ipcRenderer
+import kotlinCommon.common.model.TerminalSession
+import kotlin.js.Promise
 
 fun main() {
     window.addEventListener("DOMContentLoaded",
@@ -24,7 +25,7 @@ fun main() {
         exposeInMainWorld("terminalSendText", fun(id: Int, text:String) {
             ipcRenderer.send("terminal:sendText",id, text)
         })
-        exposeInMainWorld("terminalCreate", fun(params: dynamic): TerminalSession {
+        exposeInMainWorld("terminalCreate", fun(params: dynamic): Promise<TerminalSession> {
             return ipcRenderer.invoke<TerminalSession>("terminal:create", params)
         })
         exposeInMainWorld("terminalGetText", fun(listener: (Event, Int, String) -> Unit) {

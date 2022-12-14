@@ -1,4 +1,5 @@
 import dev.fritz2.core.*
+import kotlinCommon.common.model.TerminalSession
 import kotlinx.browser.document
 import org.w3c.dom.*
 import org.w3c.dom.Window

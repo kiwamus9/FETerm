@@ -21,12 +21,12 @@ dependencies {
 
 kotlin {
     js(IR) {
-        sourceSets["main"].apply {
-            kotlin.srcDirs(
-                layout.projectDirectory.dir("../kotlinCommon/common"),
-                layout.projectDirectory.dir("../kotlinCommon/node")
-            )
-        }
+//        sourceSets["main"].apply {
+//            kotlin.srcDirs(
+//                layout.projectDirectory.dir("../kotlinCommon/common"),
+//                layout.projectDirectory.dir("../kotlinCommon/node")
+//            )
+//        }
         binaries.executable()
         nodejs {
             compilations["main"].packageJson {

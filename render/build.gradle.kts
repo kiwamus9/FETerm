@@ -23,9 +23,9 @@ dependencies {
 }
 
 kotlin {
-    sourceSets["main"].apply {
-        kotlin.srcDir(layout.projectDirectory.dir("../kotlinCommon/common"))
-    }
+//    sourceSets["main"].apply {
+//        kotlin.srcDir(layout.projectDirectory.dir("../kotlinCommon/common"))
+//    }
     js(IR) {
         binaries.executable()
         browser {

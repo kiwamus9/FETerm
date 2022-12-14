@@ -5,27 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8f790e7-e954-44a5-977a-aa6bc837f3f7" name="変更" comment="xtermの双方向通信完成">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/render_1_0_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/render_1_0_SNAPSHOT.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/src/main/kotlin/TerminalSession.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kotlinCommon/common/Util.kt" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/kotlin/kotlinCommon/common/Util.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kotlinCommon/common/model.kt" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/kotlin/kotlinCommon/common/model.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kotlinCommon/common/xterm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/kotlin/kotlinCommon/common/xterm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kotlinCommon/node/electron.kt" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/kotlin/kotlinCommon/node/electron.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kotlinCommon/node/node-pty.kt" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/kotlin/kotlinCommon/node/node-pty.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/main/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/main/kotlin/export.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/main/kotlin/ext/electron.kt" beforeDir="false" afterPath="$PROJECT_DIR$/kotlinCommon/node/electron.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/main/kotlin/ext/node-pty.kt" beforeDir="false" afterPath="$PROJECT_DIR$/kotlinCommon/node/node-pty.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/main/kotlin/ext/xterm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/kotlinCommon/common/xterm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/main/kotlin/model/model.kt" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/kotlin/model/model.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/preload/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/preload/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preload/src/main/kotlin/ext" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/preload/src/main/kotlin/PreLoad.kt" beforeDir="false" afterPath="$PROJECT_DIR$/preload/src/main/kotlin/PreLoad.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/render/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/kotlin/Client.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/FileList.kt" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/kotlin/FileList.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/Finder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/kotlin/Finder.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/Utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/kotlin/Utils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/Welcome.kt" beforeDir="false" afterPath="$PROJECT_DIR$/kotlinCommon/common/Util.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/components/FinderHeaderContextMenu.kt" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/kotlin/components/FinderHeaderContextMenu.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/components/Lenses.kt" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/kotlin/components/Lenses.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/components/SimpleBar.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/render/src/main/kotlin/htmlToImage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/render/src/main/kotlin/htmlToImage.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +57,17 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="FETerm" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FETerm" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FETerm" type="f1a62948:ProjectNode" />
                 <item name="render" type="2d1252cf:ModuleNode" />
               </path>
               <path>
@@ -84,8 +93,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Class" />
         <option value="Kotlin File" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -94,6 +103,11 @@
     <option name="PATTERNS" value="kotlin-js-store gradle .idea .gradle build" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="7efd1a0e8fd923ab37299ef9e5f0446d22c7ad69" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="KotlinMultiplatform" KONAN_HOME="" />
@@ -112,7 +126,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/kiwamu/IdeaProjects/2022-11/FETerm&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/kiwamu/IdeaProjects/2022-11/FETerm/preload/src/main/kotlin&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -126,9 +140,17 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/preload/src/main/kotlin" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/main/src/main/kotlin/kotlinCommon/common" />
+      <recent name="$PROJECT_DIR$/main/src/main/kotlin/kotlinCommon" />
       <recent name="$PROJECT_DIR$/kotlinCommon/common" />
       <recent name="$PROJECT_DIR$/kotlinCommon/node" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.FETerm [buildDevelop]">
@@ -144,6 +166,27 @@
         <option name="taskNames">
           <list>
             <option value="buildDevelop" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="FETerm [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -176,6 +219,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.FETerm [buildDevelop]" />
+        <item itemvalue="Gradle.FETerm [clean]" />
+        <item itemvalue="Gradle.FETerm:render [build]" />
         <item itemvalue="Gradle.FETerm [buildDevelop]" />
         <item itemvalue="Gradle.FETerm:render [build]" />
       </list>
@@ -210,6 +256,7 @@
       <workItem from="1670903568291" duration="16795000" />
       <workItem from="1670932796022" duration="7827000" />
       <workItem from="1670943131583" duration="3319000" />
+      <workItem from="1671019013726" duration="3835000" />
     </task>
     <task id="LOCAL-00001" summary="wakaran">
       <created>1670315161577</created>

@@ -1,6 +1,6 @@
 @file:JsModule("node-pty")
 
-package ext.nodePty
+package kotlinCommon.node.nodePty
 
 import NodeJS.ProcessEnv
 

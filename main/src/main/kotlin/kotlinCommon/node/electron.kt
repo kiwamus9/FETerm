@@ -1,6 +1,6 @@
 @file:JsModule("electron")
 
-package ext.electron
+package kotlinCommon.node.electron
 
 import org.w3c.dom.events.Event
 import kotlin.js.Promise
@@ -53,7 +53,7 @@ external interface IpcRenderer {
     fun send(eventName: String, param: String)
     fun on(eventName: String, listener: (Event, Int, String) -> Unit)
     fun on(eventName: String, listener: (Event, String) -> Unit)
-    fun <T> invoke(eventName: String, params: dynamic): T
+    fun <T> invoke(eventName: String, params: dynamic):Promise<T>
 }
 
 // ipcMain

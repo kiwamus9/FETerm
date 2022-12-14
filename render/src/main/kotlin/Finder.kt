@@ -1,6 +1,9 @@
 import components.*
 import dev.fritz2.core.*
 import dev.fritz2.routing.routerOf
+import kotlinCommon.common.xterm.Terminal
+import kotlinCommon.common.model.ContextMenuItem
+import kotlinCommon.common.model.TerminalSession
 import kotlinx.browser.document
 import kotlinx.browser.window
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -474,7 +477,6 @@ fun main() {
                         button {
                             +"kiwamu1"
                             clicks handledBy {
-                                //window.sendToTty(99, "kiwamus9")
                                 window.terminalCreate(
                                     jsObject {
                                         dnsName = "local"
@@ -486,13 +488,12 @@ fun main() {
                                     term.onData { text ->
                                         window.terminalSendText(terminalSession.sessionID, text)
                                     }
-
                                     window.terminalGetText { _, _, text -> // event, id, text
                                         term.write(text)
                                     }
                                 }
-
                             }
+
                         }
                     }
 

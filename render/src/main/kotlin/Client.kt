@@ -4,6 +4,8 @@ import components.sortToBigger
 import components.svgFileIcon
 
 import dev.fritz2.core.*
+import kotlinCommon.common.model.ContextMenuItem
+import kotlinCommon.common.model.ItemAlign
 
 import kotlinx.browser.document
 import kotlinx.browser.window
